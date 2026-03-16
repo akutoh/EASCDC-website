@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Reset & Scroll ───────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-brand-white text-brand-black font-body;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Typography Defaults ───────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+p {
+  line-height: 1.7;
+}
+
+/* ─── Utility: initially hidden (used for staggered animations) ─────────── */
+.animate-start-hidden {
+  opacity: 0;
+}
+
+/* ─── Scrollbar (subtle brand styling) ─────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111;
+}
+::-webkit-scrollbar-thumb {
+  background: #E21B1B;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c01515;
+}
+
+/* ─── Focus visible outline (accessibility) ─────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #E21B1B;
+  outline-offset: 3px;
+}
+
+/* ─── SVG grain texture (depth layer per brand guidelines) ──────────────── */
+.grain-overlay {
+  position: relative;
+}
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Tier badge safelist (prevents Tailwind purge) ─────────────────────── */
+.badge-standard    { @apply bg-slate-500 text-white; }
+.badge-semi-elegant { @apply bg-amber-600 text-white; }
+.badge-high-end    { @apply bg-brand-red text-white; }
