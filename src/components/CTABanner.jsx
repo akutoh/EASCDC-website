@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
+import { useQuoteModal } from '../context/QuoteModalContext'
 
 /**
  * CTABanner — full-width lead generation section before the footer
  */
 export default function CTABanner() {
+  const { openModal } = useQuoteModal()
   return (
     <section
       className="relative overflow-hidden grain-overlay"
@@ -46,8 +48,9 @@ export default function CTABanner() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <Link
-              to="/contact"
+            <button
+              type="button"
+              onClick={openModal}
               className="
                 px-8 py-4 bg-brand-red text-white
                 font-title text-sm font-bold tracking-wide-label uppercase rounded
@@ -58,8 +61,22 @@ export default function CTABanner() {
                 focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black
               "
             >
-              Contact Us Today
-            </Link>
+              Get a Free Quote
+            </button>
+            <a
+              href="tel:+639171002610"
+              className="
+                px-8 py-4
+                border-2 border-white/30 text-white
+                font-title text-sm font-bold tracking-wide-label uppercase rounded
+                transition-[border-color,background-color,transform] duration-200
+                hover:border-white hover:bg-white/10 hover:-translate-y-0.5
+                active:translate-y-0
+                focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black
+              "
+            >
+              Book a Call
+            </a>
             <Link
               to="/projects"
               className="

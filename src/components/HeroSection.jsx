@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
+import { useQuoteModal } from '../context/QuoteModalContext'
 
 /**
  * HeroSection — full-viewport landing section with animated entrance
  * Background: Unsplash luxury home image with layered overlays
  */
 export default function HeroSection() {
+  const { openModal } = useQuoteModal()
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden grain-overlay"
@@ -83,8 +85,9 @@ export default function HeroSection() {
             "
           >
             {/* Primary CTA */}
-            <Link
-              to="/contact"
+            <button
+              type="button"
+              onClick={openModal}
               className="
                 px-7 py-3.5 bg-brand-red text-white
                 font-title text-sm font-bold tracking-wide-label uppercase rounded
@@ -96,9 +99,25 @@ export default function HeroSection() {
               "
             >
               Get a Free Quote
-            </Link>
+            </button>
 
-            {/* Secondary CTA */}
+            {/* Book a Call */}
+            <a
+              href="tel:+639171002610"
+              className="
+                px-7 py-3.5
+                border-2 border-white/30 text-brand-white
+                font-title text-sm font-bold tracking-wide-label uppercase rounded
+                transition-[border-color,background-color,transform] duration-200
+                hover:border-white hover:bg-white/10 hover:-translate-y-0.5
+                active:translate-y-0
+                focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black
+              "
+            >
+              Book a Call
+            </a>
+
+            {/* View Projects */}
             <Link
               to="/projects"
               className="

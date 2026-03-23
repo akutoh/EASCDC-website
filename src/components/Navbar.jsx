@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import logo from '../assets/logo.jpg'
+import { useQuoteModal } from '../context/QuoteModalContext'
 
 const NAV_LINKS = [
   { label: 'Home',       to: '/'         },
@@ -13,6 +14,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled,     setScrolled]     = useState(false)
   const [menuOpen,     setMenuOpen]     = useState(false)
+  const { openModal } = useQuoteModal()
 
   /* Detect scroll to add shadow / slight background shift */
   useEffect(() => {
@@ -92,10 +94,25 @@ export default function Navbar() {
                 </NavLink>
               </li>
             ))}
-            {/* CTA button */}
-            <li className="ml-4">
-              <Link
-                to="/contact"
+            {/* CTA buttons */}
+            <li className="ml-4 flex items-center gap-3">
+              <a
+                href="tel:+639171002610"
+                className="
+                  px-5 py-2.5
+                  border-2 border-white/30 text-brand-white
+                  font-title text-sm font-bold tracking-wide-label uppercase rounded
+                  transition-[border-color,background-color,color] duration-200
+                  hover:border-white hover:bg-white/10
+                  active:scale-95
+                  focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black
+                "
+              >
+                Book a Call
+              </a>
+              <button
+                type="button"
+                onClick={openModal}
                 className="
                   px-5 py-2.5 bg-brand-red text-brand-white font-title text-sm font-bold
                   tracking-wide-label uppercase rounded
@@ -107,7 +124,7 @@ export default function Navbar() {
                 "
               >
                 Get a Quote
-              </Link>
+              </button>
             </li>
           </ul>
 
@@ -134,7 +151,7 @@ export default function Navbar() {
         className={`
           md:hidden bg-brand-black border-t border-white/10
           overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out
-          ${menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
+          ${menuOpen ? 'max-h-[30rem] opacity-100' : 'max-h-0 opacity-0'}
         `}
       >
         <ul className="px-4 py-3 flex flex-col gap-1">
@@ -157,15 +174,31 @@ export default function Navbar() {
             </li>
           ))}
           <li className="pt-2">
-            <Link
-              to="/contact"
-              onClick={closeMenu}
+            <button
+              type="button"
+              onClick={() => { openModal(); closeMenu() }}
               className="block w-full text-center px-5 py-3 bg-brand-red text-brand-white
                          font-title text-sm font-bold tracking-wide-label uppercase rounded
-                         shadow-btn hover:bg-red-700 transition-colors duration-200"
+                         shadow-btn transition-[background-color,box-shadow] duration-200
+                         hover:bg-red-700"
             >
               Get a Quote
-            </Link>
+            </button>
+          </li>
+          <li className="pb-2">
+            <a
+              href="tel:+639171002610"
+              onClick={closeMenu}
+              className="
+                block w-full text-center px-5 py-3
+                border-2 border-white/30 text-brand-white
+                font-title text-sm font-bold tracking-wide-label uppercase rounded
+                transition-[border-color,background-color] duration-200
+                hover:border-white hover:bg-white/10
+              "
+            >
+              Book a Call
+            </a>
           </li>
         </ul>
       </div>

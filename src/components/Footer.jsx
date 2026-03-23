@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.jpg'
+import { useQuoteModal } from '../context/QuoteModalContext'
 
 /* ── Icon components ─────────────────────────────────────────────────────── */
 const FacebookIcon = () => (
@@ -56,6 +57,7 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   const year = new Date().getFullYear()
+  const { openModal } = useQuoteModal()
 
   return (
     <footer className="bg-brand-dark text-brand-gray">
@@ -171,8 +173,9 @@ export default function Footer() {
             <p className="font-body text-sm text-brand-gray/80 leading-relaxed mb-5">
               Ready to turn your vision into reality? Our team is here to help every step of the way.
             </p>
-            <Link
-              to="/contact"
+            <button
+              type="button"
+              onClick={openModal}
               className="
                 inline-block px-5 py-2.5 bg-brand-red text-white
                 font-title text-xs font-bold tracking-wide-label uppercase rounded
@@ -184,7 +187,21 @@ export default function Footer() {
               "
             >
               Get a Free Quote
-            </Link>
+            </button>
+            <a
+              href="tel:+639171002610"
+              className="
+                inline-block mt-3 px-5 py-2.5
+                border border-brand-gray/40 text-brand-gray
+                font-title text-xs font-bold tracking-wide-label uppercase rounded
+                transition-[border-color,color,background-color] duration-200
+                hover:border-brand-gray hover:text-brand-white hover:bg-white/5
+                active:scale-95
+                focus-visible:ring-2 focus-visible:ring-brand-gray/50
+              "
+            >
+              Book a Call
+            </a>
           </div>
 
         </div>
