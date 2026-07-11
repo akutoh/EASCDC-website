@@ -72,7 +72,7 @@ export default function HeroSection() {
               animate-start-hidden animate-fade-slide-up-d2
             "
           >
-            E.A. Sitchon Construction brings over a decade of expertise in
+            E.A. Sitchon Construction brings almost a decade of expertise in
             residential and commercial construction — delivering quality structures
             on time, on budget, and built to last.
           </p>
@@ -98,24 +98,8 @@ export default function HeroSection() {
                 focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black
               "
             >
-              Get a Free Quote
+              Get a Quote
             </button>
-
-            {/* Book a Call */}
-            <a
-              href="tel:+639171002610"
-              className="
-                px-7 py-3.5
-                border-2 border-white/30 text-brand-white
-                font-title text-sm font-bold tracking-wide-label uppercase rounded
-                transition-[border-color,background-color,transform] duration-200
-                hover:border-white hover:bg-white/10 hover:-translate-y-0.5
-                active:translate-y-0
-                focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black
-              "
-            >
-              Book a Call
-            </a>
 
             {/* View Projects */}
             <Link
@@ -143,8 +127,8 @@ export default function HeroSection() {
             "
           >
             {[
-              { value: '10+',  label: 'Years in Business'  },
-              { value: '80+',  label: 'Projects Completed' },
+              { value: '7+', label: 'Years in Business' },
+              { value: '50+', label: 'Projects Completed' },
               { value: '100%', label: 'Client Satisfaction' },
             ].map(({ value, label }) => (
               <div key={label}>

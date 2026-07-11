@@ -3,7 +3,9 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
-import Placeholder from './pages/Placeholder'
+import Services from './pages/Services'
+import About from './pages/About'
+import Contact from './pages/Contact'
 import { QuoteModalProvider } from './context/QuoteModalContext'
 import QuoteModal from './components/QuoteModal'
 
@@ -16,9 +18,9 @@ export default function App() {
           <Routes>
             <Route path="/"           element={<Home />} />
             <Route path="/projects"   element={<Projects />} />
-            <Route path="/services"   element={<Placeholder tab="Services" />} />
-            <Route path="/about"      element={<Placeholder tab="About Us" />} />
-            <Route path="/contact"    element={<Placeholder tab="Contact Us" />} />
+            <Route path="/services"   element={<Services />} />
+            <Route path="/about"      element={<About />} />
+            <Route path="/contact"    element={<Contact />} />
           </Routes>
         </main>
         <Footer />

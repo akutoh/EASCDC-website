@@ -235,7 +235,7 @@ export default function QuoteModal() {
               id="quote-modal-title"
               className="font-display text-2xl sm:text-3xl text-brand-white tracking-tight-display"
             >
-              Get a Free Quote
+              Get a Quote
             </h2>
           </div>
           <p className="font-body text-sm text-brand-gray/70 ml-4 pl-0.5">

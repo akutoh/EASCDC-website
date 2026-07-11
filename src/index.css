@@ -29,6 +29,15 @@ p {
   opacity: 0;
 }
 
+/* ─── Utility: hide scrollbar (horizontal quick-nav on mobile) ──────────── */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* ─── Scrollbar (subtle brand styling) ─────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;

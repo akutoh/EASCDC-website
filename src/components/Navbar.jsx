@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import logo from '../assets/logo.jpg'
+import logo from '../assets/easlogo.png'
 import { useQuoteModal } from '../context/QuoteModalContext'
 
 const NAV_LINKS = [
-  { label: 'Home',       to: '/'         },
-  { label: 'Projects',   to: '/projects' },
-  { label: 'Services',   to: '/services' },
-  { label: 'About Us',   to: '/about'    },
-  { label: 'Contact Us', to: '/contact'  },
+  { label: 'Home', to: '/' },
+  { label: 'Projects', to: '/projects' },
+  { label: 'Services', to: '/services' },
+  { label: 'About Us', to: '/about' },
+  { label: 'Contact Us', to: '/contact' },
 ]
 
 export default function Navbar() {
-  const [scrolled,     setScrolled]     = useState(false)
-  const [menuOpen,     setMenuOpen]     = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const { openModal } = useQuoteModal()
 
   /* Detect scroll to add shadow / slight background shift */
@@ -48,16 +48,16 @@ export default function Navbar() {
             <img
               src={logo}
               alt="E.A. Sitchon Construction logo"
-              className="h-10 w-10 md:h-12 md:w-12 object-contain rounded-sm
+              className="h-10 w-10 md:h-12 md:w-12 object-contain
                          transition-transform duration-300 group-hover:scale-105"
             />
             <div className="leading-tight">
-              <span className="block font-display text-brand-white text-xl md:text-2xl tracking-tight-display">
-                E.A. SITCHON
+              <span className="block font-display text-brand-white text-lg md:text-xl tracking-tight-display whitespace-nowrap">
+                ERWIN A. <span className="text-brand-red">SITCHON</span>
               </span>
-              <span className="block font-title text-brand-red text-[10px] md:text-xs font-semibold
-                               tracking-wide-label uppercase">
-                Construction
+              <span className="block font-title text-brand-gray text-[9px] md:text-[10px] font-semibold
+                               tracking-wide-label uppercase whitespace-nowrap">
+                Construction Development Corporation
               </span>
             </div>
           </Link>
@@ -96,20 +96,6 @@ export default function Navbar() {
             ))}
             {/* CTA buttons */}
             <li className="ml-4 flex items-center gap-3">
-              <a
-                href="tel:+639171002610"
-                className="
-                  px-5 py-2.5
-                  border-2 border-white/30 text-brand-white
-                  font-title text-sm font-bold tracking-wide-label uppercase rounded
-                  transition-[border-color,background-color,color] duration-200
-                  hover:border-white hover:bg-white/10
-                  active:scale-95
-                  focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black
-                "
-              >
-                Book a Call
-              </a>
               <button
                 type="button"
                 onClick={openModal}
@@ -184,21 +170,6 @@ export default function Navbar() {
             >
               Get a Quote
             </button>
-          </li>
-          <li className="pb-2">
-            <a
-              href="tel:+639171002610"
-              onClick={closeMenu}
-              className="
-                block w-full text-center px-5 py-3
-                border-2 border-white/30 text-brand-white
-                font-title text-sm font-bold tracking-wide-label uppercase rounded
-                transition-[border-color,background-color] duration-200
-                hover:border-white hover:bg-white/10
-              "
-            >
-              Book a Call
-            </a>
           </li>
         </ul>
       </div>
