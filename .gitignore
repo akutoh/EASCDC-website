@@ -6,3 +6,9 @@ dist/
 *.log
 .DS_Store
 Thumbs.db
+
+# Local Claude Code config (machine-specific)
+.claude/
+
+# Local image backups (originals kept before optimization)
+brand_assets/_originals/

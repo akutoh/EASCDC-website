@@ -1,116 +1,70 @@
 /**
- * Project data for E.A. Sitchon Construction
- * 9 sample projects — 3 per finish tier, Filipino locations
+ * Project data for E.A. Sitchon Construction — actual completed / in-progress builds.
  *
- * finishType: 'standard' | 'semi-elegant' | 'high-end'
+ * finishType: 'standard' | 'semi-elegant'
+ * type:       building type (free text label, e.g. "Two-Storey Residential")
+ * images:     array of local asset imports (first image is used as the card cover)
+ *
+ * Local assets live in /brand_assets and are imported so Vite fingerprints & optimizes them.
  */
 
+// ── Rodelas — Standard Finish ──────────────────────────────────────────────
+import rodelas1 from '../../brand_assets/standard_finish/rodelas/rodelas_1.png'
+import rodelas2 from '../../brand_assets/standard_finish/rodelas/rodelas_2.jpg'
+import rodelas3 from '../../brand_assets/standard_finish/rodelas/rodelas_3.jpg'
+import rodelas4 from '../../brand_assets/standard_finish/rodelas/rodelas_4.jpg'
+
+// ── Ramos — Semi-Elegant Finish ────────────────────────────────────────────
+import ramos1 from '../../brand_assets/semi_elegant_finish/ramos/ramos_1.jpg'
+import ramos2 from '../../brand_assets/semi_elegant_finish/ramos/ramos_2.jpeg'
+import ramos3 from '../../brand_assets/semi_elegant_finish/ramos/ramos_3.jpg'
+import ramos4 from '../../brand_assets/semi_elegant_finish/ramos/ramos_4.jpg'
+
+// ── AKLATTE — Semi-Elegant Finish ──────────────────────────────────────────
+import aklatte1 from '../../brand_assets/semi_elegant_finish/aklatte/aklatte_1.jpg'
+import aklatte2 from '../../brand_assets/semi_elegant_finish/aklatte/aklatte_2.jpg'
+import aklatte3 from '../../brand_assets/semi_elegant_finish/aklatte/aklatte_3.jpg'
+
 export const projects = [
-  // ── Standard Finish ─────────────────────────────────────────────────────
   {
     id: 1,
-    name: 'Dela Cruz Family Residence',
-    location: 'Bacoor, Cavite',
-    year: 2022,
+    name: 'Rodelas Family Residence',
+    location: 'Alfonso, Cavite',
+    year: 2025,
+    type: 'Two-Storey Residential',
     finishType: 'standard',
     description:
-      'A practical two-bedroom bungalow built with durable materials and clean lines. Designed for comfort and low-maintenance living for a young family.',
-    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80',
+      'A modern two-storey Airbnb designed for comfort, relaxation, and memorable stays. It features stylish interiors, spacious living areas, well-appointed bedrooms, and a private small pool — perfect for unwinding with family or friends. Blending functionality with contemporary design, this home offers a cozy yet luxurious retreat for every guest.',
+    images: [rodelas1, rodelas2, rodelas3, rodelas4],
   },
   {
     id: 2,
-    name: 'Santos Single-Storey Home',
-    location: 'Calamba, Laguna',
-    year: 2023,
-    finishType: 'standard',
+    name: 'Ramos Family Residence',
+    location: 'Pila, Laguna',
+    year: 2025,
+    type: 'Two-Storey Residential',
+    finishType: 'semi-elegant',
     description:
-      'Efficiently designed single-storey home maximizing lot space. Features reinforced concrete construction with standard ceramic tile flooring throughout.',
-    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
+      'A two-storey residential home with a semi-elegant finish, combining modern design, refined details, and functional spaces to create a stylish yet comfortable home for everyday living.',
+    images: [ramos1, ramos2, ramos3, ramos4],
   },
   {
     id: 3,
-    name: 'Mendoza Bungalow Project',
-    location: 'Imus, Cavite',
-    year: 2021,
-    finishType: 'standard',
-    description:
-      'Three-bedroom bungalow on a corner lot with a covered garage and open-plan living area. Completed ahead of schedule with zero cost overruns.',
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80',
-  },
-
-  // ── Semi-Elegant Finish ──────────────────────────────────────────────────
-  {
-    id: 4,
-    name: 'Reyes Colonial Townhouse',
-    location: 'Dasmariñas, Cavite',
-    year: 2022,
+    name: 'AKLATTE',
+    location: 'Pila, Laguna',
+    year: 2026,
+    type: 'Two-Storey Coffee Shop',
     finishType: 'semi-elegant',
     description:
-      'A refined two-storey colonial-style townhouse featuring imported floor tiles, custom woodwork, and a landscaped front garden. Modern comforts with classic aesthetics.',
-    image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80',
-  },
-  {
-    id: 5,
-    name: 'Garcia Modern Residence',
-    location: 'Biñan, Laguna',
-    year: 2023,
-    finishType: 'semi-elegant',
-    description:
-      'Contemporary four-bedroom home with an open kitchen island, recessed lighting, and a semi-private entertainment deck. A perfect blend of style and function.',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
-  },
-  {
-    id: 6,
-    name: 'Villanueva Two-Storey Home',
-    location: 'San Pedro, Laguna',
-    year: 2022,
-    finishType: 'semi-elegant',
-    description:
-      'Elegant two-storey home with high ceilings, tempered glass balustrades, and a master suite with an en-suite bath. Designed for a growing family.',
-    image: 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=800&q=80',
-  },
-
-  // ── High-End Finish ──────────────────────────────────────────────────────
-  {
-    id: 7,
-    name: 'Aquino Prestige Manor',
-    location: 'Alabang, Muntinlupa',
-    year: 2023,
-    finishType: 'high-end',
-    description:
-      'A landmark luxury residence featuring imported Italian marble floors, a resort-style pool, smart home automation, and a fully equipped home theater.',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
-  },
-  {
-    id: 8,
-    name: 'Soriano Signature Estate',
-    location: 'BF Homes, Parañaque',
-    year: 2022,
-    finishType: 'high-end',
-    description:
-      'Grand five-bedroom estate with a wine cellar, rooftop garden, and double-height foyer. Every detail crafted to the client\'s exacting specifications.',
-    image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80',
-  },
-  {
-    id: 9,
-    name: 'Tan Hillcrest Villa',
-    location: 'Tagaytay City, Cavite',
-    year: 2023,
-    finishType: 'high-end',
-    description:
-      'Breathtaking hilltop villa with panoramic views of Taal Lake. Floor-to-ceiling glass walls, infinity-edge pool, and bespoke interior design throughout.',
-    image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80',
+      'A modern two-storey coffee shop with an inviting al fresco vibe, thoughtfully designed to blend cozy spaces with open-air seating for a relaxing and memorable café experience.',
+    images: [aklatte1, aklatte2, aklatte3],
   },
 ]
 
 /**
- * Helper: return 3 featured projects (one per tier) for the Home page
+ * Featured projects for the Home page — all current projects.
  */
-export const featuredProjects = [
-  projects.find(p => p.finishType === 'standard'),
-  projects.find(p => p.finishType === 'semi-elegant'),
-  projects.find(p => p.finishType === 'high-end'),
-]
+export const featuredProjects = projects
 
 /**
  * Tier metadata — labels, badge CSS classes, and accent colors
@@ -125,10 +79,5 @@ export const tierMeta = {
     label: 'Semi-Elegant Finish',
     badgeClass: 'badge-semi-elegant',
     color: '#d97706', // amber-600
-  },
-  'high-end': {
-    label: 'High-End Finish',
-    badgeClass: 'badge-high-end',
-    color: '#E21B1B', // brand-red
   },
 }

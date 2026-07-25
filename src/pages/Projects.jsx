@@ -31,10 +31,7 @@ export default function Projects() {
         {/* Background image with overlay */}
         <div
           className="absolute inset-0 bg-cover bg-center opacity-25"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80')",
-          }}
+          style={{ backgroundImage: `url('${projects[0].images[0]}')` }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-brand-black via-transparent to-brand-black" />
         {/* Left accent bar */}

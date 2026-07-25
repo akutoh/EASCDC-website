@@ -76,3 +76,9 @@ p {
 .badge-standard    { @apply bg-slate-500 text-white; }
 .badge-semi-elegant { @apply bg-amber-600 text-white; }
 .badge-high-end    { @apply bg-brand-red text-white; }
+
+/* ─── Subtle display enhancement for real project photos ────────────────── */
+/* Non-destructive: evens out phone-camera flatness so the gallery reads cleanly. */
+.img-enhance {
+  filter: contrast(1.04) saturate(1.06) brightness(1.01);
+}

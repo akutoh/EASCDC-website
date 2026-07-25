@@ -1,7 +1,7 @@
 /**
  * FilterBar — tab-style filter buttons for the Projects page
  * Props:
- *   activeFilter  — current filter string ('all' | 'standard' | 'semi-elegant' | 'high-end')
+ *   activeFilter  — current filter string ('all' | 'standard' | 'semi-elegant')
  *   onChange      — (filter: string) => void
  */
 
@@ -9,7 +9,6 @@ const FILTERS = [
   { value: 'all',          label: 'All Projects'       },
   { value: 'standard',     label: 'Standard Finish'    },
   { value: 'semi-elegant', label: 'Semi-Elegant Finish' },
-  { value: 'high-end',     label: 'High-End Finish'    },
 ]
 
 export default function FilterBar({ activeFilter, onChange }) {

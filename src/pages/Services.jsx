@@ -60,8 +60,8 @@ const IconIndustrial = () => (
 )
 
 const PLAN_AND_DESIGN = [
-  { icon: <Icon2D />,          title: '2D',                      description: 'Detailed 2D floor plans and technical drawings for accurate space planning.' },
-  { icon: <Icon3D />,          title: '3D',                      description: 'Photorealistic 3D renders that bring your future space to life before construction begins.' },
+  { icon: <Icon2D />,          title: 'Floor Plan',              description: 'Detailed 2D floor plans and technical drawings for accurate space planning.' },
+  { icon: <Icon3D />,          title: 'Perspective',             description: 'Photorealistic 3D renders that bring your future space to life before construction begins.' },
   { icon: <IconWalkthrough />, title: 'Walkthrough',             description: 'Immersive walkthrough visuals so you can experience your design before it’s built.' },
   { icon: <IconPlanSet />,     title: 'Complete Sets of Plan',   description: 'Full architectural and engineering plan sets, ready for permitting and construction.' },
 ]

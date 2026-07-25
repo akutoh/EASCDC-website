@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { featuredProjects, tierMeta } from '../data/projects'
+import ImageGallery from './ImageGallery'
 
 const ArrowRightIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -28,7 +29,7 @@ export default function FeaturedProjects() {
               Featured Projects
             </h2>
             <p className="mt-3 font-body text-sm text-brand-gray/70 max-w-sm leading-relaxed">
-              A sample across our three finish tiers — from functional to extraordinary.
+              A closer look at our recent builds — homes and spaces crafted with care.
             </p>
           </div>
           <Link
@@ -66,27 +67,16 @@ export default function FeaturedProjects() {
                   hover:-translate-y-1.5 hover:shadow-card-hover
                 "
               >
-                {/* Image */}
-                <div className="relative h-52 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    loading="lazy"
-                    className="
-                      w-full h-full object-cover
-                      transition-transform duration-500
-                      group-hover:scale-105
-                    "
+                {/* Scrollable photo gallery — real project assets */}
+                <div className="relative">
+                  <ImageGallery
+                    images={project.images}
+                    name={project.name}
+                    heightClass="h-52"
                   />
-                  {/* Image gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  {/* Red color-treatment layer */}
-                  <div className="absolute inset-0 bg-brand-red/10 opacity-0 group-hover:opacity-100
-                                  transition-opacity duration-300 mix-blend-multiply" />
-
-                  {/* Tier badge — floated on image */}
+                  {/* Tier badge — floated over gallery */}
                   <span className={`
-                    absolute top-3 left-3 px-2.5 py-1
+                    absolute top-3 left-3 z-10 px-2.5 py-1
                     text-[10px] font-title font-bold tracking-wide-label uppercase rounded
                     ${tier.badgeClass}
                   `}>
@@ -96,6 +86,11 @@ export default function FeaturedProjects() {
 
                 {/* Content */}
                 <div className="p-5">
+                  {project.type && (
+                    <p className="font-title text-[10px] font-bold tracking-wide-label uppercase text-brand-red mb-1.5">
+                      {project.type}
+                    </p>
+                  )}
                   <h3 className="font-display text-xl text-brand-white mb-1">
                     {project.name}
                   </h3>

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { tierMeta } from '../data/projects'
+import ImageGallery from './ImageGallery'
 
 const XIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -94,28 +95,36 @@ export default function ProjectModal({ project, onClose }) {
           <XIcon />
         </button>
 
-        {/* Image */}
-        <div className="relative h-56 sm:h-72 rounded-t-xl overflow-hidden">
-          <img
-            src={project.image}
-            alt={project.name}
-            className="w-full h-full object-cover"
+        {/* Scrollable photo gallery — real project assets */}
+        <div className="rounded-t-xl overflow-hidden">
+          <ImageGallery
+            images={project.images}
+            name={project.name}
+            heightClass="h-64 sm:h-80"
           />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-          {/* Tier badge on image */}
-          <span className={`
-            absolute bottom-4 left-5
-            px-3 py-1.5 text-xs font-title font-bold tracking-wide-label uppercase rounded
-            ${tier.badgeClass}
-          `}>
-            {tier.label}
-          </span>
         </div>
 
         {/* Details */}
         <div className="p-6 sm:p-8">
+          {/* Badges: finish tier + building type */}
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            <span className={`
+              px-3 py-1.5 text-xs font-title font-bold tracking-wide-label uppercase rounded
+              ${tier.badgeClass}
+            `}>
+              {tier.label}
+            </span>
+            {project.type && (
+              <span className="
+                px-3 py-1.5 rounded
+                border border-brand-black/15 text-brand-black/70
+                font-title text-xs font-bold tracking-wide-label uppercase
+              ">
+                {project.type}
+              </span>
+            )}
+          </div>
+
           {/* Name */}
           <h2 className="font-display text-3xl sm:text-4xl text-brand-black mb-3">
             {project.name}
@@ -129,7 +138,7 @@ export default function ProjectModal({ project, onClose }) {
             </span>
             <span className="flex items-center gap-1.5 font-body text-sm text-brand-black/60">
               <CalendarIcon />
-              Completed {project.year}
+              {project.year}
             </span>
           </div>
 
