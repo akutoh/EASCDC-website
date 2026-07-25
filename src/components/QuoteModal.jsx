@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import emailjs from '@emailjs/browser'
 import { useQuoteModal } from '../context/QuoteModalContext'
 
 /* ── Icons ──────────────────────────────────────────────────────────────── */
@@ -152,31 +151,23 @@ export default function QuoteModal() {
 
     setStatus('sending')
 
-    const payload = {
-      from_name:    form.fullName,
-      from_email:   form.email,
-      phone:        form.phone,
-      location:     form.location,
-      project_type: form.projectType,
-      services:     form.services.join(', ') || 'None specified',
-      description:  form.description || 'None provided',
-    }
-
-    // Console log (simulates backend)
-    console.log('Quote Request Submitted:', payload)
-
     try {
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        payload,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      )
+      const res = await fetch('/api/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Request failed')
+      }
+
       setStatus('success')
       setForm(INITIAL_FORM)
       setTouched({})
     } catch (err) {
-      console.error('EmailJS error:', err)
+      console.error('Quote send error:', err)
       setStatus('error')
     }
   }
