@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useQuoteModal } from '../context/QuoteModalContext'
+import AppointmentPicker from './AppointmentPicker'
 
 /* ── Icons ──────────────────────────────────────────────────────────────── */
 const XIcon = () => (
@@ -18,13 +19,25 @@ const CheckIcon = () => (
 
 /* ── Constants ───────────────────────────────────────────────────────────── */
 const INITIAL_FORM = {
-  fullName:    '',
-  email:       '',
-  phone:       '',
-  location:    '',
-  projectType: '',
-  services:    [],
-  description: '',
+  fullName:        '',
+  email:           '',
+  phone:           '',
+  location:        '',
+  projectType:     '',
+  services:        [],
+  description:     '',
+  wantsAppointment: false,
+  appointmentDate:  '',   // 'YYYY-MM-DD'
+  appointmentTime:  '',   // e.g. '9:00 AM'
+}
+
+/* Human-readable appointment date, e.g. "Saturday, August 26, 2026" */
+function formatApptDate(iso) {
+  if (!iso) return ''
+  const d = new Date(iso + 'T00:00:00')
+  return d.toLocaleDateString('en-US', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+  })
 }
 
 const PROJECT_TYPES = ['Residential', 'Commercial', 'Renovation', 'Extension']
@@ -132,10 +145,20 @@ export default function QuoteModal() {
     }))
   }
 
+  /* Appointment handlers */
+  function handleApptToggle() {
+    setForm(f => f.wantsAppointment
+      ? { ...f, wantsAppointment: false, appointmentDate: '', appointmentTime: '' }
+      : { ...f, wantsAppointment: true })
+  }
+  function handleSelectDate(iso)  { setForm(f => ({ ...f, appointmentDate: iso })) }
+  function handleSelectTime(time) { setForm(f => ({ ...f, appointmentTime: time })) }
+
   /* Required field validation */
   const required = ['fullName', 'email', 'phone', 'location', 'projectType']
+  const apptComplete = !form.wantsAppointment || (form.appointmentDate && form.appointmentTime)
   function isValid() {
-    return required.every(k => form[k].trim() !== '')
+    return required.every(k => form[k].trim() !== '') && apptComplete
   }
 
   /* Submit */
@@ -145,17 +168,24 @@ export default function QuoteModal() {
     // Touch all required fields to show errors if any are empty
     const newTouched = {}
     required.forEach(k => { newTouched[k] = true })
+    if (form.wantsAppointment) newTouched.appointment = true
     setTouched(newTouched)
 
     if (!isValid()) return
 
     setStatus('sending')
 
+    const payload = {
+      ...form,
+      // human-readable appointment date for the email
+      appointmentLabel: form.wantsAppointment ? formatApptDate(form.appointmentDate) : '',
+    }
+
     try {
       const res = await fetch('/api/quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       })
 
       if (!res.ok) {
@@ -435,6 +465,64 @@ export default function QuoteModal() {
                     focus:outline-none focus:border-brand-red hover:border-white/25
                   "
                 />
+              </div>
+
+              {/* ── Schedule an Appointment ───────────────────────── */}
+              <div className="mb-6 pt-5 border-t border-white/10">
+                <div className="flex items-center justify-between gap-4">
+                  <span
+                    id="appt-label"
+                    className="font-title text-[11px] sm:text-xs font-bold tracking-wide-label uppercase text-brand-gray"
+                  >
+                    Do you want to schedule an appointment?
+                  </span>
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={form.wantsAppointment}
+                    aria-labelledby="appt-label"
+                    onClick={handleApptToggle}
+                    className={`
+                      relative shrink-0 w-12 h-6 rounded-full
+                      transition-[background-color] duration-200
+                      focus-visible:ring-2 focus-visible:ring-brand-red
+                      focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface
+                      ${form.wantsAppointment ? 'bg-brand-red' : 'bg-white/15'}
+                    `}
+                  >
+                    <span className={`
+                      absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white
+                      transition-transform duration-200
+                      ${form.wantsAppointment ? 'translate-x-6' : 'translate-x-0'}
+                    `} />
+                  </button>
+                </div>
+
+                {form.wantsAppointment && (
+                  <div className="mt-4 animate-fade-in animate-start-hidden">
+                    <AppointmentPicker
+                      selectedDate={form.appointmentDate}
+                      selectedTime={form.appointmentTime}
+                      onSelectDate={handleSelectDate}
+                      onSelectTime={handleSelectTime}
+                    />
+
+                    {/* Selected summary */}
+                    {form.appointmentDate && form.appointmentTime && (
+                      <p className="mt-3 font-body text-xs text-brand-gray/80">
+                        <span className="text-brand-red font-bold tracking-wide-label uppercase">Selected:</span>{' '}
+                        {formatApptDate(form.appointmentDate)} · {form.appointmentTime}
+                      </p>
+                    )}
+
+                    {/* Inline validation */}
+                    {touched.appointment && !apptComplete && (
+                      <p className="mt-2 font-body text-xs text-brand-red">
+                        Please choose both a date and a time for your appointment.
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Error banner */}

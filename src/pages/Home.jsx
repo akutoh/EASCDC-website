@@ -1,6 +1,7 @@
 import HeroSection      from '../components/HeroSection'
 import ValueProps       from '../components/ValueProps'
 import FeaturedProjects from '../components/FeaturedProjects'
+import Testimonials     from '../components/Testimonials'
 import CTABanner        from '../components/CTABanner'
 
 /**
@@ -12,6 +13,7 @@ export default function Home() {
       <HeroSection />
       <ValueProps />
       <FeaturedProjects />
+      <Testimonials />
       <CTABanner />
     </>
   )

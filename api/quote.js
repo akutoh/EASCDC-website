@@ -61,6 +61,13 @@ export default async function handler(req, res) {
     : (body.services || '').trim()
   const description = (body.description || '').trim()
 
+  // Optional appointment
+  const wantsAppointment = body.wantsAppointment === true
+  const appointmentLabel = (body.appointmentLabel || '').trim() // readable date
+  const appointmentDate  = (body.appointmentDate  || '').trim() // YYYY-MM-DD fallback
+  const appointmentTime  = (body.appointmentTime  || '').trim()
+  const hasAppointment   = wantsAppointment && (appointmentLabel || appointmentDate) && appointmentTime
+
   // Server-side validation mirrors the form's required fields.
   if (!fullName || !email || !phone || !location || !projectType) {
     return res.status(400).json({ error: 'Please fill in all required fields.' })
@@ -78,6 +85,10 @@ export default async function handler(req, res) {
     ['Services',     services || 'None specified'],
     ['Description',  description || 'None provided'],
   ]
+
+  if (hasAppointment) {
+    rows.push(['Appointment', `${appointmentLabel || appointmentDate} at ${appointmentTime}`])
+  }
 
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:0 auto;">
@@ -110,7 +121,7 @@ export default async function handler(req, res) {
         from: fromEmail,
         to: [toEmail],
         reply_to: email,          // reply goes straight to the customer
-        subject: `Quote Request — ${fullName} (${projectType})`,
+        subject: `Quote Request — ${fullName} (${projectType})${hasAppointment ? ' 📅 Appointment' : ''}`,
         html,
         text,
       }),

@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback } from 'react'
+import logo from '../assets/easlogo.png'
 
 const ChevronLeft = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -144,6 +145,16 @@ export default function ImageGallery({ images = [], name = '', heightClass = 'as
           ))}
         </div>
       )}
+
+      {/* ── Brand watermark — bottom-left, fixed over the viewport ─────── */}
+      <img
+        src={logo}
+        alt=""
+        aria-hidden="true"
+        className="absolute bottom-3 left-3 z-10 h-5 w-auto object-contain
+                   opacity-90 pointer-events-none select-none
+                   [filter:drop-shadow(0_1px_3px_rgba(0,0,0,0.6))]"
+      />
     </div>
   )
 }
